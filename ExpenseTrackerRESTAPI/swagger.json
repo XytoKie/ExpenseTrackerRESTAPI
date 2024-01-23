@@ -1,0 +1,362 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Expences Tracker API",
+    "version": "1.0",
+    "description": "Web service for tracking user's expences in different currencies",
+    "contact": {
+      "name": "Vasily Khomenko",
+      "email": "vas.khomenko@gmail.com"
+    },
+    "license": {
+      "name": "Copyright (c) 2024  Vasily Khomenko"
+    },
+    "termsOfService": ""
+  },
+  "servers": [
+    {
+      "url": "/",
+      "description": "API context root"
+    }
+  ],
+
+  "basePath": "/",
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "operationId": "get_all_users",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "operationId": "get_user",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "Int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInfo"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "operationId": "create_user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserInfo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "operationId": "delete_user",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "Int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/currencies": {
+      "get": {
+        "tags": [
+          "currencies"
+        ],
+        "operationId": "get_all_currencies",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrencyInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/currency": {
+      "get": {
+        "tags": [
+          "currencies"
+        ],
+        "operationId": "get_currency",
+        "parameters": [
+          {
+            "name": "currency_id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "Int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrencyInfo"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "currencies"
+        ],
+        "operationId": "create_currency",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CurrencyInfo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "currencies"
+        ],
+        "operationId": "delete_currency",
+        "parameters": [
+          {
+            "name": "currency_id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "Int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/records": {
+      "get": {
+        "tags": [
+          "records"
+        ],
+        "operationId": "get_records",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "Int64"
+            }
+          },
+          {
+            "name": "currency_id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "Int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecordInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/record": {
+      "post": {
+        "tags": [
+          "records"
+        ],
+        "operationId": "add_record",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecordInfo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+
+  },
+  "components": {
+    "schemas": {
+      "UserInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "Int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "currency_id": {
+            "type": "integer",
+            "format": "Int64"
+          }
+        }
+      },
+      "CurrencyInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "Int64"
+          },
+          "code": {
+            "type": "string"
+          },
+          "full_name": {
+            "type": "string"
+          }
+        }
+      },
+      "RecordInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "Int64"
+          },
+          "user_id": {
+            "type": "integer",
+            "format": "Int64"
+          },
+          "currency_id": {
+            "type": "integer",
+            "format": "Int64"
+          },
+          "amount": {
+            "type": "number",
+            "format": "Double"
+          }
+        }
+      }
+    }
+  }
+
+}
